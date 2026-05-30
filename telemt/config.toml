@@ -24,7 +24,7 @@ tls = true
 show = "*"
 # show = ["alice", "bob"] # Only show links for alice and bob
 # show = "*"              # Show links for all users
-public_host = "vpn-fi.entcloud.ru"  # Host (IP or domain) for tg:// links
+public_host = "vpn.entcloud.ru"  # Host (IP or domain) for tg:// links
 public_port = 443                  # Port for tg:// links (default: server.port)
 
 # === Server Binding ===

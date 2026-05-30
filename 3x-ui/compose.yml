@@ -5,9 +5,6 @@ services:
     hostname: vpn-fi.entcloud.ru
     volumes:
       - $PWD/db/:/etc/x-ui/
-      - $PWD/db/config1.json:/app/bin/config.json
-#      - $PWD/cert/:/root/cert/
-#      - /etc/letsencrypt/live/vpn-fi.entcloud.ru/:/root/cert/
       - /etc/letsencrypt:/etc/letsencrypt:ro 
     environment:
       XRAY_VMESS_AEAD_FORCED: "false"
