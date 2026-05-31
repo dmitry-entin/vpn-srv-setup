@@ -1,4 +1,3 @@
-version: '3'
 services:
   ssh-service:
     image: nokitakaze/amnezia-vpn-server
