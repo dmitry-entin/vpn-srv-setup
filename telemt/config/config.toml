@@ -45,6 +45,8 @@ minimal_runtime_cache_ttl_ms = 1000
 # Listen on multiple interfaces/IPs - IPv4
 [[server.listeners]]
 ip = "0.0.0.0"
+client_mss = "tspu"
+synlimit = "nftables" #nftables or iptables
 
 # === Anti-Censorship & Masking ===
 [censorship]

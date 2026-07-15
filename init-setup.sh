@@ -68,6 +68,8 @@ ufw allow $SSH_PORT
 # Panel ports
 ufw allow 2053
 ufw allow 45153
+# Subscriptions port
+ufw allow 45196
 # Amnezia ports
 ufw allow 53
 ufw allow 25222

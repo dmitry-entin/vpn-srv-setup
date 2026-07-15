@@ -1,6 +1,7 @@
 services:
   ssh-service:
     image: nokitakaze/amnezia-vpn-server
+    restart: unless-stopped
     ports:
       - "25222:22"
     volumes:

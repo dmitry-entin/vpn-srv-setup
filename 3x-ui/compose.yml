@@ -2,7 +2,7 @@ services:
   3xui:
     image: ghcr.io/mhsanaei/3x-ui:latest
     container_name: 3xui_app
-    hostname: vpn-fi.entcloud.ru
+    hostname: vpn.entcloud.ru
     volumes:
       - $PWD/db/:/etc/x-ui/
       - /etc/letsencrypt:/etc/letsencrypt:ro 
