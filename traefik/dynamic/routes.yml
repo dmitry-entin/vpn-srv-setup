@@ -1,0 +1,12 @@
+tcp:
+  routers:
+    telemt:
+      rule: "HostSNI(`*`)"
+      entryPoints: [websecure]
+      service: telemt
+      tls: { passthrough: true }
+  services:
+    telemt:
+      loadBalancer:
+        servers:
+          - address: "telemt:443"

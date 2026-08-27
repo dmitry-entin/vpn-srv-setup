@@ -2,9 +2,10 @@
 set -Eeuo pipefail
 
 # Enter values for settings
-SSH_PORT=12345
-TG_BOT_TOKEN=1234567890:AAEXAMPLE_BOT_TOKEN_xxxxxxxxxxxxx
-TG_CHAT_ID=123456789
+DOMAIN="vpn-alt.entcloud.ru"
+SSH_PORT=47153
+TG_BOT_TOKEN="8065396130:AAHGciuCf5eFIC5jYUZYfCUpqub2Qeu9KHc"
+TG_CHAT_ID="790119632"
 EXTERNAL_IP=$(curl -s -4 --max-time 10 ipv4.icanhazip.com || curl -s -4 --max-time 10 ifconfig.me || echo "")
 PAM_NOTIFY_SCRIPT="/usr/local/libexec/ssh-login-telegram.sh"
 PAM_NOTIFY_LOG="/var/log/ssh-login-telegram.log"
@@ -73,7 +74,9 @@ ufw allow 45196
 # Amnezia ports
 ufw allow 53
 ufw allow 25222
+ufw allow 25223
 ufw allow 25401
+ufw allow 25402
 # 3x-ui ports
 ufw allow 27600:27620/tcp
 ufw allow 27600:27620/udp
@@ -85,7 +88,6 @@ ufw enable
 ufw status verbose
 
 ### Certbot for 3x-UI
-DOMAIN="vpn.entcloud.ru"
 apt-get install certbot -y
 certbot certonly --standalone --agree-tos --register-unsafely-without-email -d $DOMAIN
 certbot renew --dry-run

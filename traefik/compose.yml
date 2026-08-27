@@ -1,0 +1,24 @@
+services:
+  traefik:
+    image: traefik:v3.3
+    container_name: traefik
+    restart: unless-stopped
+    command:
+      - --providers.file.directory=/etc/traefik/dynamic
+      - --providers.file.watch=true
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --accesslog=true
+      - --certificatesresolvers.le.acme.httpchallenge=true
+      - --certificatesresolvers.le.acme.httpchallenge.entrypoint=web
+      - --certificatesresolvers.le.acme.email=d.entin@mail.ru
+      - --certificatesresolvers.le.acme.storage=/acme/acme.json
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./dynamic:/etc/traefik/dynamic:ro
+      - ./acme:/acme
+    networks: [telemt-net]
+networks:
+  telemt-net:  { external: true, name: telemt_default }
