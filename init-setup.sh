@@ -2,10 +2,10 @@
 set -Eeuo pipefail
 
 # Enter values for settings
-DOMAIN="vpn-alt.entcloud.ru"
-SSH_PORT=47153
-TG_BOT_TOKEN="8065396130:AAHGciuCf5eFIC5jYUZYfCUpqub2Qeu9KHc"
-TG_CHAT_ID="790119632"
+DOMAIN=""
+SSH_PORT=
+TG_BOT_TOKEN=""
+TG_CHAT_ID=""
 EXTERNAL_IP=$(curl -s -4 --max-time 10 ipv4.icanhazip.com || curl -s -4 --max-time 10 ifconfig.me || echo "")
 PAM_NOTIFY_SCRIPT="/usr/local/libexec/ssh-login-telegram.sh"
 PAM_NOTIFY_LOG="/var/log/ssh-login-telegram.log"
