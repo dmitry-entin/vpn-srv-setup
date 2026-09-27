@@ -55,7 +55,7 @@ fi
 export DEBIAN_FRONTEND=noninteractive
 apt update -y
 apt upgrade -y
-apt install -y ufw fail2ban curl ca-certificates libpam-modules logrotate
+apt install -y ufw fail2ban curl ca-certificates libpam-modules logrotate ipset iptables python3 iproute2 util-linux
 
 ### Install Docker
 bash <(curl -sSL https://get.docker.com)
@@ -77,6 +77,7 @@ ufw allow 25222
 ufw allow 25223
 ufw allow 25401
 ufw allow 25402
+ufw allow 25403
 # 3x-ui ports
 ufw allow 27600:27620/tcp
 ufw allow 27600:27620/udp

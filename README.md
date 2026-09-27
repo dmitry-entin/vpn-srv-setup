@@ -1,0 +1,1 @@
+Do not forget to update some settings (in init script, telemt conf, etc) according to server's name and/or IP address.
