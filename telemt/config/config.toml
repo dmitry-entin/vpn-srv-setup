@@ -37,8 +37,8 @@ port = 443
 
 [server.api]
 enabled = true
-listen = "127.0.0.1:9091"
-whitelist = ["127.0.0.1/32", "::1/128"]
+listen = "0.0.0.0:9091"
+whitelist = ["127.0.0.1/32", "::1/128", "172.19.0.1/32"]
 minimal_runtime_enabled = false
 minimal_runtime_cache_ttl_ms = 1000
 
@@ -61,5 +61,37 @@ tls_front_dir = "tlsfront"   # Cache directory for TLS emulation
 [access.users]
 # format: "username" = "32_hex_chars_secret"
 # $openssl rand -hex 16
+web-user = "21e7347550ec09932e4e3669b3707b09"
 family = "7b6d6c144df1006e0d9a8a7fb5e38783"
 friends = "82ed02bdb179bdf8f60803a37981d7ea"
+
+
+# === WEB mode (behind Traefik) ===
+[[server.listeners]]
+ip = "0.0.0.0"
+port = 18080
+transport = "web"
+proxy_protocol = false
+reuse_allow = false
+web_client_ip_source = "x_forwarded_for"
+web_trusted_proxy_cidrs = ["172.19.0.0/16"]
+
+[web]
+enabled = true
+carrier = "https"
+
+[[web.vhosts]]
+host = "svc-alt.entcloud.ru"
+public_addr = "153.80.178.112:443"
+
+[web.vhosts.decoy]
+mode = "static_directory"
+directory = "/var/lib/telemt/public"
+index = "index.html"
+
+[[web.vhosts.profiles]]
+user = "web-user"
+secret_mode = "dd"
+max_sessions = 8
+max_streams = 512
+max_streams_per_session = 64

@@ -1,7 +1,7 @@
 tcp:
   routers:
     telemt:
-      rule: "HostSNI(`*`)"
+      rule: "HostSNI(`ya.ru`)"
       entryPoints: [websecure]
       service: telemt
       tls: { passthrough: true }
@@ -10,3 +10,34 @@ tcp:
       loadBalancer:
         servers:
           - address: "telemt:443"
+
+http:
+  routers:
+    telemt-web:
+      rule: "Host(`svc-alt.entcloud.ru`)"
+      entryPoints: [websecure]
+      service: telemt-web
+      tls:
+        certResolver: le
+      observability:
+        accessLogs: false
+    telemt-web-http:
+      rule: "Host(`svc-alt.entcloud.ru`)"
+      entryPoints: [web]
+      middlewares: [to-https]
+      service: telemt-web
+      observability:
+        accessLogs: false
+  middlewares:
+    to-https:
+      redirectScheme:
+        scheme: https
+        permanent: true
+  services:
+    telemt-web:
+      loadBalancer:
+        passHostHeader: true
+        responseForwarding:
+          flushInterval: "1ms"
+        servers:
+          - url: "http://telemt:18080"
